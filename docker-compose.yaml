@@ -1,8 +1,0 @@
-services:
-  server:
-    build:
-      context: '.'
-      dockerfile: Dockerfile
-    container_name: rentacat
-    ports:
-      - "8080:8080"
