@@ -210,6 +210,8 @@ configured using another file in YAML format named docker-compose.yaml.  In our
 case, we just have one container so it is rather simple:
 
 ```
+version: '3'
+
 services:
   server:
     build:
