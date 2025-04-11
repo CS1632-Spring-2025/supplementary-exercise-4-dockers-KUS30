@@ -34,7 +34,6 @@ public class D3Test {
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;
-
   @Before
   public void setUp() {
     ChromeOptions options = new ChromeOptions();
@@ -43,176 +42,279 @@ public class D3Test {
     js = (JavascriptExecutor) driver;
     vars = new HashMap<String, Object>();
   }
-
   @After
   public void tearDown() {
     driver.quit();
   }
-
   @Test
-  public void testLinks() {
+  public void tEST1LINKS() {
     driver.get("http://localhost:8080/");
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    }
     driver.findElement(By.linkText("Reset")).click();
     driver.manage().window().setSize(new Dimension(1440, 778));
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/header/nav/ul/li[8]/a")));
-    WebElement element = driver.findElement(By.xpath("/html/body/div/header/nav/ul/li[8]/a"));
-    String attribute = element.getAttribute("href");
-    vars.put("src", attribute);
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/header/nav/ul/li[8]/a")));
+    }
+    {
+      WebElement element = driver.findElement(By.xpath("/html/body/div/header/nav/ul/li[8]/a"));
+      String attribute = element.getAttribute("href");
+      vars.put("src", attribute);
+    }
     assertEquals(vars.get("src").toString(), "http://localhost:8080/reset");
     driver.close();
   }
-
   @Test
-  public void testReset() {
+  public void tEST2RESET() {
     driver.get("http://localhost:8080/");
     js.executeScript("document.cookie = \"1=true\";document.cookie = \"2=true\";document.cookie = \"3=true\";");
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    }
     driver.findElement(By.linkText("Reset")).click();
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"cat-id1\"]")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"cat-id1\"]")));
+    }
     assertThat(driver.findElement(By.xpath("//*[@id=\"cat-id1\"]")).getText(), is("ID 1. Jennyanydots"));
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"cat-id2\"]")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"cat-id2\"]")));
+    }
     assertThat(driver.findElement(By.xpath("//*[@id=\"cat-id2\"]")).getText(), is("ID 2. Old Deuteronomy"));
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"cat-id3\"]")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"cat-id3\"]")));
+    }
     assertThat(driver.findElement(By.xpath("//*[@id=\"cat-id3\"]")).getText(), is("ID 3. Mistoffelees"));
     driver.close();
   }
-
   @Test
-  public void testCatalog() {
+  public void tEST3CATALOG() {
     driver.get("http://localhost:8080/");
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    }
     driver.findElement(By.linkText("Reset")).click();
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
     driver.manage().window().setSize(new Dimension(1440, 778));
     driver.findElement(By.linkText("Catalog")).click();
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/ol/li[2]/img")));
-    WebElement element = driver.findElement(By.xpath("/html/body/div/main/div[1]/ol/li[2]/img"));
-    String attribute = element.getAttribute("src");
-    vars.put("src", attribute);
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/ol/li[2]/img")));
+    }
+    {
+      WebElement element = driver.findElement(By.xpath("/html/body/div/main/div[1]/ol/li[2]/img"));
+      String attribute = element.getAttribute("src");
+      vars.put("src", attribute);
+    }
     assertEquals(vars.get("src").toString(), "http://localhost:8080/images/cat2.jpg");
     driver.close();
   }
-
   @Test
-  public void testListing() {
+  public void tEST4LISTING() {
     driver.get("http://localhost:8080/");
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    }
     driver.findElement(By.linkText("Reset")).click();
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
     driver.manage().window().setSize(new Dimension(1440, 778));
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Catalog")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Catalog")));
+    }
     driver.findElement(By.linkText("Catalog")).click();
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/div/ul/li[3]")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/div/ul/li[3]")));
+    }
     assertThat(driver.findElement(By.xpath("/html/body/div/main/div[1]/div/ul/li[3]")).getText(), is("ID 3. Mistoffelees"));
     vars.put("listsize", driver.findElements(By.xpath("//*[@id=\"listing\"]/ul/li")).size());
     assertEquals(vars.get("listsize").toString(), "3");
     driver.close();
   }
-
   @Test
-  public void testRentACat() {
+  public void tEST5RENTACAT() {
     driver.get("http://localhost:8080/rent-a-cat");
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    }
     driver.findElement(By.linkText("Reset")).click();
     driver.manage().window().setSize(new Dimension(1440, 778));
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Rent-A-Cat")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Rent-A-Cat")));
+    }
     driver.findElement(By.linkText("Rent-A-Cat")).click();
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/div[2]/div[3]/button")));
-    assert(driver.findElements(By.xpath("/html/body/div/main/div[1]/div[2]/div[3]/button")).size() > 0);
-    assert(driver.findElements(By.xpath("/html/body/div/main/div[1]/div[3]/div[3]/button")).size() > 0);
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/div[2]/div[3]/button")));
+    }
+    {
+      List<WebElement> elements = driver.findElements(By.xpath("/html/body/div/main/div[1]/div[2]/div[3]/button"));
+      assert(elements.size() > 0);
+    }
+    {
+      List<WebElement> elements = driver.findElements(By.xpath("/html/body/div/main/div[1]/div[3]/div[3]/button"));
+      assert(elements.size() > 0);
+    }
     driver.close();
   }
-
   @Test
-  public void testRent() {
+  public void tEST6RENT() {
     driver.get("http://localhost:8080/");
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    }
     driver.findElement(By.linkText("Reset")).click();
     driver.manage().window().setSize(new Dimension(1440, 778));
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.presenceOfElementLocated(By.linkText("Rent-A-Cat")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Rent-A-Cat")));
+    }
     driver.findElement(By.linkText("Rent-A-Cat")).click();
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.presenceOfElementLocated(By.id("rentID")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.presenceOfElementLocated(By.id("rentID")));
+    }
     driver.findElement(By.id("rentID")).click();
     driver.findElement(By.id("rentID")).sendKeys("1");
     driver.findElement(By.cssSelector(".form-group:nth-child(3) .btn")).click();
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"listing\"]/ul")));
-    assertThat(driver.findElement(By.xpath("//ul[@class='list-group']/li[1]")).getText(), is("Rented out"));
-    assertThat(driver.findElement(By.xpath("//ul[@class='list-group']/li[2]")).getText(), is("ID 2. Old Deuteronomy"));
-    assertThat(driver.findElement(By.xpath("//ul[@class='list-group']/li[3]")).getText(), is("ID 3. Mistoffelees"));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"listing\"]/ul")));
+    }
+    assertThat(driver.findElement(By.xpath("//ul[@class=\'list-group\']/li[1]")).getText(), is("Rented out"));
+    assertThat(driver.findElement(By.xpath("//ul[@class=\'list-group\']/li[2]")).getText(), is("ID 2. Old Deuteronomy"));
+    assertThat(driver.findElement(By.xpath("//ul[@class=\'list-group\']/li[3]")).getText(), is("ID 3. Mistoffelees"));
     assertThat(driver.findElement(By.xpath("//*[@id=\"rentResult\"]")).getText(), is("Success!"));
     driver.close();
   }
-
   @Test
-  public void testReturn() {
+  public void tEST7RETURN() {
     driver.get("http://localhost:8080/");
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    }
     driver.findElement(By.linkText("Reset")).click();
     js.executeScript("javascript:{document.cookie = \"1=false\";document.cookie = \"2=true\";document.cookie = \"3=false\";void(0)}");
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.presenceOfElementLocated(By.linkText("Rent-A-Cat")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Rent-A-Cat")));
+    }
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Rent-A-Cat")));
+    }
     driver.findElement(By.linkText("Rent-A-Cat")).click();
     driver.findElement(By.id("returnID")).click();
     driver.findElement(By.id("returnID")).sendKeys("2");
     driver.findElement(By.cssSelector(".form-group:nth-child(4) .btn")).click();
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"cat-id1\"]")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"cat-id1\"]")));
+    }
     assertThat(driver.findElement(By.xpath("//*[@id=\"cat-id1\"]")).getText(), is("ID 1. Jennyanydots"));
     assertThat(driver.findElement(By.xpath("//*[@id=\"cat-id2\"]")).getText(), is("ID 2. Old Deuteronomy"));
     assertThat(driver.findElement(By.xpath("//*[@id=\"cat-id3\"]")).getText(), is("ID 3. Mistoffelees"));
     assertThat(driver.findElement(By.xpath("//*[@id=\"returnResult\"]")).getText(), is("Success!"));
     driver.close();
   }
-
   @Test
-  public void testFeedACat() {
+  public void tEST8FEEDACAT() {
     driver.get("http://localhost:8080/");
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    }
     driver.findElement(By.linkText("Reset")).click();
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
     driver.manage().window().setSize(new Dimension(1440, 778));
     driver.findElement(By.linkText("Feed-A-Cat")).click();
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/main/div[1]/div[2]/div[3]/button")));
-    assert(driver.findElements(By.xpath("/html/body/div/main/div[1]/div[2]/div[3]/button")).size() > 0);
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/main/div[1]/div[2]/div[3]/button")));
+    }
+    {
+      List<WebElement> elements = driver.findElements(By.xpath("/html/body/div/main/div[1]/div[2]/div[3]/button"));
+      assert(elements.size() > 0);
+    }
     assertThat(driver.findElement(By.xpath("/html/body/div/main/div[1]/div[2]/div[3]/button")).getText(), is("Feed"));
     driver.close();
   }
-
   @Test
-  public void testFeed() {
+  public void tEST9FEED() {
     driver.get("http://localhost:8080/");
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    }
     driver.findElement(By.linkText("Reset")).click();
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
     driver.manage().window().setSize(new Dimension(1440, 778));
     driver.findElement(By.linkText("Feed-A-Cat")).click();
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"catnips\"]")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"catnips\"]")));
+    }
     driver.findElement(By.xpath("//*[@id=\"catnips\"]")).click();
     driver.findElement(By.id("catnips")).sendKeys("6");
     driver.findElement(By.cssSelector(".btn")).click();
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='feedResult' and text()='Nom, nom, nom.']")));
-    assertThat(driver.findElement(By.xpath("//*[@id='feedResult' and text()='Nom, nom, nom.']")).getText(), is("Nom, nom, nom."));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\'feedResult\' and text()=\'Nom, nom, nom.\']")));
+    }
+    assertThat(driver.findElement(By.xpath("//*[@id=\'feedResult\' and text()=\'Nom, nom, nom.\']")).getText(), is("Nom, nom, nom."));
     driver.close();
   }
-
   @Test
-  public void testGreetACat() {
+  public void tEST10GREETACAT() {
     driver.get("http://localhost:8080/");
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    }
     driver.findElement(By.linkText("Reset")).click();
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
     driver.manage().window().setSize(new Dimension(1440, 778));
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.presenceOfElementLocated(By.linkText("Greet-A-Cat")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Greet-A-Cat")));
+    }
     driver.findElement(By.linkText("Greet-A-Cat")).click();
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.textToBe(By.xpath("//*[@id=\"greeting\"]/h4"), "Meow!Meow!Meow!"));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"greeting\"]/h4")));
+    }
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"greeting\"]/h4")));
+    }
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.textToBe(By.xpath("//*[@id=\"greeting\"]/h4"), "Meow!Meow!Meow!"));
+    }
     assertThat(driver.findElement(By.xpath("//*[@id=\"greeting\"]/h4")).getText(), is("Meow!Meow!Meow!"));
     driver.close();
   }
-
   @Test
-  public void testGreetACatWithName() {
+  public void tEST11GREETACATWITHNAME() {
     driver.get("http://localhost:8080/");
-    new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reset")));
+    }
     driver.findElement(By.linkText("Reset")).click();
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
     driver.get("http://localhost:8080//greet-a-cat/Jennyanydots");
@@ -220,3 +322,4 @@ public class D3Test {
     driver.close();
   }
 }
+
